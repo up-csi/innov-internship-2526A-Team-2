@@ -47,18 +47,17 @@ function checkGuess() {
     let guessString = '';
     const rightGuess = Array.from(rightGuessString);
 
-    const guess = currentGuess.join('');
-    if (!WORDS.includes(guess)) {
-        alert('Not an English word!');
-        return;
-    }
-
     for (const val of currentGuess) {
         guessString += val;
     }
 
     if (guessString.length !== WORD_LENGTH) {
         alert('Not enough letters!');
+        return;
+    }
+
+     if (!WORDS.includes(guessString)) {
+        alert('Not an English word!');
         return;
     }
 
