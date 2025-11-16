@@ -85,7 +85,7 @@ function checkGuess() {
         }, delay);
     }
 
-    if ((guessString === rightGuessString) && (guessesRemaining > 0)) {
+    if (guessString === rightGuessString && guessesRemaining > 0) {
         guessesRemaining -= 1;
         gameOver = true;
         alert('You guessed right! Game over!');
@@ -118,7 +118,7 @@ function insertLetter(pressedKey) {
 }
 
 document.addEventListener('keyup', e => {
-    if (gameOver || (guessesRemaining <= 0)) {
+    if (gameOver || guessesRemaining <= 0) {
         return;
     }
 
