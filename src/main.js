@@ -7,6 +7,8 @@ let currentGuess = [];
 let nextLetter = 0;
 let gameOver = false;
 const rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)];
+const showHintGuessCount = 3;
+let isHintPressed = false;
 
 function initBoard() {
     const board = document.getElementById('game-board');
@@ -172,6 +174,12 @@ document.addEventListener('keyup', e => {
 
     if (pressedKey === 'Enter') {
         checkGuess();
+
+        if (guessesRemaining <= showHintGuessCount) {
+            showHint();
+            return;
+        }
+
         return;
     }
 
@@ -196,5 +204,35 @@ document.getElementById('keyboard-cont').addEventListener('click', e => {
 
     document.dispatchEvent(new KeyboardEvent('keyup', { key: key }));
 });
+
+
+function showHint() {
+    const hintButton = document.getElementById('hint-button')
+    hintButton.classList.remove('hidden');
+
+    hintButton.addEventListener('click', () => {
+        if (guessesRemaining == 0) {
+            alert("Game has already ended... stop asking for hints!");
+            return;
+        }
+
+        if (isHintPressed) {
+            alert("You already used your hint...");
+            return;
+        }
+
+        if (guessesRemaining == 1) {
+            alert("Do you really want to lose?");
+            return;
+        }
+        
+        alert("Your hint is..."); // change this part for task 3 & 4
+        removeCurrentGuess();
+        isHintPressed = true;
+        return;
+    });
+    
+    return;
+}
 
 initBoard();
